@@ -1,0 +1,55 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #181818;
+    color: white;
+}
+
+#game-container {
+    margin-top: 20px;
+}
+
+#game-area {
+    width: 700px;
+    height: 500px;
+    background-color: #222;
+    border: 2px solid white;
+    margin: auto;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Estilos de los fantasmas */
+.ghost {
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+}
+
+/* Normal */
+.normal-ghost {
+    background: url('img/normal_ghost.png');
+}
+
+/* Maldito */
+.cursed-ghost {
+    background: url('img/cursed_ghost.png');
+}
+
+/* Dorado */
+.golden-ghost {
+    background: url('img/golden_ghost.png');
+    width: 64px;
+    height: 64px;
+    box-shadow: 0 0 10px yellow;
+}

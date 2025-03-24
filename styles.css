@@ -7,7 +7,9 @@
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-    background-color: #181818;
+    /* background-color: #181818; */
+    background: url('https://t3.ftcdn.net/jpg/07/37/86/00/360_F_737860068_WJHvYxp47S6f3Y7oJQLwiBHrnfr8BGBg.jpg') no-repeat center center fixed;
+    background-size: cover;
     color: white;
 }
 

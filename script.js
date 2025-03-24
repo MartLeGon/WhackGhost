@@ -25,48 +25,52 @@ function startGame() {
 }
 
 function spawnGhost() {
-    if (ghostCount >= 20) {
+    if (ghostCount >= 25) {
         gameOver();
         return;
     }
 
-    const ghost = document.createElement("div");
-    ghost.classList.add("ghost");
+    let numGhosts = Math.floor(Math.random() * 5) + 1; // Uno a 5 fantasmas por segundo
 
-    let ghostType = Math.random();
-    
-    if (ghostType < 0.7) {
-        ghost.classList.add("normal-ghost"); // 70% chance
-        ghost.dataset.points = "1";
-    } else if (ghostType < 0.9) {
-        ghost.classList.add("cursed-ghost"); // 20% chance
-        ghost.dataset.points = "-2";
+    for (let i = 0; i < numGhosts; i++) {
+        if (ghostCount >= 25) break; // Parar
 
-        setTimeout(() => {
-            if (ghost.parentElement) {
-                ghost.remove();
-                ghostCount--;
-            }
-        }, 2000);
-    } else {
-        ghost.classList.add("golden-ghost"); // 10% chance
-        ghost.dataset.points = "5";
+        const ghost = document.createElement("div");
+        ghost.classList.add("ghost");
+
+        let ghostType = Math.random();
+        if (ghostType < 0.7) {
+            ghost.classList.add("normal-ghost");
+            ghost.dataset.points = "1";
+        } else if (ghostType < 0.9) {
+            ghost.classList.add("cursed-ghost");
+            ghost.dataset.points = "-2";
+            setTimeout(() => {
+                if (ghost.parentElement) {
+                    ghost.remove();
+                    ghostCount--;
+                }
+            }, 2000);
+        } else {
+            ghost.classList.add("golden-ghost");
+            ghost.dataset.points = "5";
+        }
+
+        ghost.style.left = Math.random() * (gameArea.clientWidth - 50) + "px";
+        ghost.style.top = Math.random() * (gameArea.clientHeight - 50) + "px";
+        ghost.style.transform = `rotate(${Math.random() * 360}deg)`;
+
+        ghost.addEventListener("click", () => {
+            if (gameOverFlag) return;
+            score += parseInt(ghost.dataset.points);
+            scoreDisplay.textContent = score;
+            ghost.remove();
+            ghostCount--;
+        });
+
+        gameArea.appendChild(ghost);
+        ghostCount++;
     }
-
-    ghost.style.left = Math.random() * (gameArea.clientWidth - 50) + "px";
-    ghost.style.top = Math.random() * (gameArea.clientHeight - 50) + "px";
-    ghost.style.transform = `rotate(${Math.random() * 360}deg)`;
-
-    ghost.addEventListener("click", (event) => {
-        if (gameOverFlag) return;
-        score += parseInt(ghost.dataset.points);
-        scoreDisplay.textContent = score;
-        ghost.remove();
-        ghostCount--;
-    });
-
-    gameArea.appendChild(ghost);
-    ghostCount++;
 }
 
 // Incrementar la dificultad!!!
